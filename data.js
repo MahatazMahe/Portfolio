@@ -20,7 +20,7 @@ const PORTFOLIO_DATA = {
 
   socials: [
     { label: "GitHub", url: "https://github.com/your-username" }, // EDIT ME
-    { label: "LinkedIn", url: "https://linkedin.com/in/your-profile" }, // EDIT ME
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/mahataz-mahe-261188284" },
   ],
 
   // ---------- ABOUT ----------
@@ -108,4 +108,28 @@ const PORTFOLIO_DATA = {
       period: "Expected 2027",
     },
   ],
+
+  // ---------- CERTIFICATES ----------
+  // Add one entry per certificate. thumbnail = image shown on the tile.
+  // url = where the tile links to when clicked (the original certificate page).
+  certificates: [
+    {
+      title: "Intro to SQL",
+      issuer: "Kaggle",
+      thumbnail: "https://storage.googleapis.com/kaggle-learn-certificates/34292592/c7b199df81d0d554c90c5c6487dad946.png",
+      url: "https://www.kaggle.com/learn/certification/mahatazmahe/intro-to-sql",
+    },
+    {
+      title: "Python",
+      issuer: "Kaggle",
+      thumbnail: "https://storage.googleapis.com/kaggle-learn-certificates/34292592/df67faae0ee28e47d181fe1fcc16c15e.png",
+      url: "https://www.kaggle.com/learn/certification/mahatazmahe/python",
+    },
+  ],
+
+  // ---------- CV ----------
+  cv: {
+    url: "", // EDIT ME: link to your CV — a PDF works best (Google Drive "share" link, GitHub raw link, etc.)
+    updated: "", // EDIT ME (optional): e.g. "Updated Aug 2026"
+  },
 };

@@ -193,6 +193,73 @@ a{color:inherit; text-decoration:none;}
 .project-card__links a:hover{color:var(--accent); border-color:var(--accent);}
 
 /* ==========================================================
+   CERTIFICATES
+   ========================================================== */
+.certs__grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px;}
+.cert-tile{
+  display:flex; flex-direction:column;
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  overflow:hidden; position:relative;
+  opacity:0; transform:translateY(20px);
+  transition:opacity .6s ease, transform .25s cubic-bezier(.2,.7,.3,1),
+             border-color .2s ease, box-shadow .25s ease, background .2s ease;
+}
+.cert-tile.in-view{opacity:1; transform:translateY(0);}
+.cert-tile:hover{
+  border-color:var(--accent-2);
+  transform:translateY(-4px) scale(1.015);
+  box-shadow:0 14px 32px -14px rgba(63,167,150,0.35);
+}
+.cert-tile:active{
+  transform:translateY(-1px) scale(0.98);
+  transition-duration:.08s;
+  box-shadow:0 6px 16px -10px rgba(63,167,150,0.45);
+}
+.cert-tile__thumb{
+  aspect-ratio:1.4; overflow:hidden; background:var(--surface-2); border-bottom:1px solid var(--border);
+}
+.cert-tile__thumb img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .4s cubic-bezier(.2,.7,.3,1);
+}
+.cert-tile:hover .cert-tile__thumb img{transform:scale(1.06);}
+.cert-tile__body{padding:18px 20px 22px;}
+.cert-tile__title{font-size:16px; font-weight:600; color:var(--text);}
+.cert-tile__issuer{font-size:13px; color:var(--accent-2); margin-top:4px; font-family:var(--font-mono);}
+.cert-tile__arrow{
+  position:absolute; top:14px; right:14px; width:28px; height:28px; border-radius:50%;
+  background:rgba(14,17,22,0.6); backdrop-filter:blur(4px);
+  display:flex; align-items:center; justify-content:center; font-size:13px; color:var(--text);
+  opacity:0; transform:translate(-4px,4px); transition:opacity .2s ease, transform .2s ease;
+}
+.cert-tile:hover .cert-tile__arrow{opacity:1; transform:translate(0,0);}
+
+/* ==========================================================
+   CV
+   ========================================================== */
+.cv__panel{max-width:760px;}
+.cv-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  overflow:hidden;
+  opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;
+}
+.cv-card.in-view{opacity:1; transform:translateY(0);}
+.cv-card__info{padding:28px; display:flex; flex-direction:column; gap:6px;}
+.cv-card__title{font-family:var(--font-display); font-size:19px; font-weight:600;}
+.cv-card__meta{color:var(--muted); font-size:12px;}
+.cv-card__actions{display:flex; gap:12px; margin-top:14px; flex-wrap:wrap;}
+.cv-card__viewer{border-top:1px solid var(--border); background:var(--surface-2);}
+.cv-card__viewer iframe{width:100%; height:520px; border:0; display:block;}
+.cv-card--empty{
+  padding:28px; color:var(--muted); font-size:14px; opacity:1; transform:none;
+}
+.cv-card--empty code{
+  font-family:var(--font-mono); background:var(--surface-2); border:1px solid var(--border);
+  padding:2px 6px; border-radius:4px; color:var(--accent);
+}
+@media (max-width:600px){.cv-card__viewer iframe{height:380px;}}
+
+/* ==========================================================
    TIMELINE (experience + education)
    ========================================================== */
 .timeline{display:flex; flex-direction:column;}

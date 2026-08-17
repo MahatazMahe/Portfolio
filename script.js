@@ -63,6 +63,27 @@
     projectsGrid.appendChild(card);
   });
 
+  // ---------- CERTIFICATES ----------
+  const certsGrid = document.getElementById('certsGrid');
+  (d.certificates || []).forEach(c => {
+    const a = document.createElement('a');
+    a.className = 'cert-tile';
+    a.href = c.url || '#';
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.innerHTML = `
+      <div class="cert-tile__thumb">
+        <img src="${escapeAttr(c.thumbnail)}" alt="${escapeAttr(c.title)} certificate" loading="lazy" />
+      </div>
+      <div class="cert-tile__body">
+        <div class="cert-tile__title">${escapeHtml(c.title)}</div>
+        <div class="cert-tile__issuer">${escapeHtml(c.issuer)}</div>
+      </div>
+      <span class="cert-tile__arrow" aria-hidden="true">↗</span>
+    `;
+    certsGrid.appendChild(a);
+  });
+
   // ---------- EXPERIENCE ----------
   const expList = document.getElementById('experienceList');
   d.experience.forEach(e => expList.appendChild(timelineItem(e)));
@@ -83,6 +104,27 @@
         ${item.bullets && item.bullets.length ? `<ul class="timeline-item__bullets">${item.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}</ul>` : ''}
       </div>`;
     return div;
+  }
+
+  // ---------- CV ----------
+  const cvPanel = document.getElementById('cvPanel');
+  const cvUrl = (d.cv && d.cv.url) ? d.cv.url : ((d.resumeUrl && d.resumeUrl !== '#') ? d.resumeUrl : '');
+  if (cvUrl) {
+    const isPdf = /\.pdf($|\?)/i.test(cvUrl);
+    cvPanel.innerHTML = `
+      <div class="cv-card">
+        <div class="cv-card__info">
+          <div class="cv-card__title">Mahataz Mahe — CV</div>
+          ${d.cv && d.cv.updated ? `<div class="cv-card__meta mono">${escapeHtml(d.cv.updated)}</div>` : ''}
+          <div class="cv-card__actions">
+            <a href="${escapeAttr(cvUrl)}" target="_blank" rel="noopener" class="btn btn--primary">View CV ↗</a>
+            <a href="${escapeAttr(cvUrl)}" download class="btn btn--ghost">Download ↓</a>
+          </div>
+        </div>
+        ${isPdf ? `<div class="cv-card__viewer"><iframe src="${escapeAttr(cvUrl)}" title="CV preview" loading="lazy"></iframe></div>` : ''}
+      </div>`;
+  } else {
+    cvPanel.innerHTML = `<div class="cv-card cv-card--empty">Add your CV link in <code>data.js</code> (<span class="mono">cv.url</span>) to show it here.</div>`;
   }
 
   // ---------- CONTACT ----------
@@ -120,7 +162,7 @@
     });
   }, { threshold: 0.15 });
 
-  document.querySelectorAll('.section__head, .project-card, .timeline-item').forEach(el => observer.observe(el));
+  document.querySelectorAll('.section__head, .project-card, .timeline-item, .cert-tile, .cv-card').forEach(el => observer.observe(el));
 
   // ---------- helpers ----------
   function escapeHtml(str) {
