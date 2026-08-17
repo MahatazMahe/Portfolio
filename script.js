@@ -1,0 +1,130 @@
+(function () {
+  const d = PORTFOLIO_DATA;
+
+  // ---------- HERO ----------
+  document.getElementById('heroName').textContent = d.name;
+  document.getElementById('heroRole').textContent = d.role;
+  document.getElementById('heroTagline').textContent = d.tagline;
+  document.title = `${d.name} — ${d.role}`;
+
+  const resumeLink = document.getElementById('resumeLink');
+  resumeLink.href = d.resumeUrl || '#';
+  if (!d.resumeUrl || d.resumeUrl === '#') resumeLink.style.display = 'none';
+
+  const statsEl = document.getElementById('heroStats');
+  d.stats.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'stat';
+    div.innerHTML = `<div class="stat__value">${escapeHtml(s.value)}</div><div class="stat__label">${escapeHtml(s.label)}</div>`;
+    statsEl.appendChild(div);
+  });
+
+  // ---------- ABOUT ----------
+  document.getElementById('aboutText').textContent = d.about.trim();
+  const photoSlot = document.getElementById('photoSlot');
+  if (d.photoUrl) {
+    photoSlot.innerHTML = `<img src="${escapeAttr(d.photoUrl)}" alt="${escapeAttr(d.name)}" />`;
+  } else {
+    const initials = d.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    photoSlot.textContent = initials;
+  }
+
+  // ---------- SKILLS ----------
+  const skillsGrid = document.getElementById('skillsGrid');
+  d.skillGroups.forEach(group => {
+    const wrap = document.createElement('div');
+    wrap.className = 'skill-group';
+    wrap.innerHTML = `
+      <div class="skill-group__label">${escapeHtml(group.label)}</div>
+      <div class="skill-group__list">
+        ${group.skills.map(s => `<span class="skill-chip">${escapeHtml(s)}</span>`).join('')}
+      </div>`;
+    skillsGrid.appendChild(wrap);
+  });
+
+  // ---------- PROJECTS ----------
+  const statusClass = { 'Live': 'status--live', 'In progress': 'status--progress', 'Planned': 'status--planned' };
+  const projectsGrid = document.getElementById('projectsGrid');
+  d.projects.forEach(p => {
+    const card = document.createElement('article');
+    card.className = 'project-card';
+    const links = [];
+    if (p.githubUrl) links.push(`<a href="${escapeAttr(p.githubUrl)}" target="_blank" rel="noopener">Code ↗</a>`);
+    if (p.liveUrl) links.push(`<a href="${escapeAttr(p.liveUrl)}" target="_blank" rel="noopener">Live ↗</a>`);
+    card.innerHTML = `
+      <div class="project-card__top">
+        <div class="project-card__title">${escapeHtml(p.title)}</div>
+        <span class="status ${statusClass[p.status] || 'status--planned'}">${escapeHtml(p.status)}</span>
+      </div>
+      <p class="project-card__desc">${escapeHtml(p.description)}</p>
+      <div class="project-card__stack">${p.stack.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
+      ${links.length ? `<div class="project-card__links">${links.join('')}</div>` : ''}
+    `;
+    projectsGrid.appendChild(card);
+  });
+
+  // ---------- EXPERIENCE ----------
+  const expList = document.getElementById('experienceList');
+  d.experience.forEach(e => expList.appendChild(timelineItem(e)));
+
+  const eduList = document.getElementById('educationList');
+  d.education.forEach(e => eduList.appendChild(timelineItem({
+    role: e.degree, org: e.org, period: e.period, bullets: []
+  })));
+
+  function timelineItem(item) {
+    const div = document.createElement('div');
+    div.className = 'timeline-item';
+    div.innerHTML = `
+      <div class="timeline-item__period">${escapeHtml(item.period)}</div>
+      <div>
+        <div class="timeline-item__role">${escapeHtml(item.role)}</div>
+        <div class="timeline-item__org">${escapeHtml(item.org)}</div>
+        ${item.bullets && item.bullets.length ? `<ul class="timeline-item__bullets">${item.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}</ul>` : ''}
+      </div>`;
+    return div;
+  }
+
+  // ---------- CONTACT ----------
+  const emailLink = document.getElementById('emailLink');
+  emailLink.href = `mailto:${d.email}`;
+  emailLink.textContent = d.email;
+
+  const phoneLink = document.getElementById('phoneLink');
+  phoneLink.href = `tel:${d.phone.replace(/\s+/g, '')}`;
+  phoneLink.textContent = d.phone;
+
+  const socialLinks = document.getElementById('socialLinks');
+  d.socials.forEach(s => {
+    const a = document.createElement('a');
+    a.href = s.url; a.target = '_blank'; a.rel = 'noopener';
+    a.textContent = s.label;
+    socialLinks.appendChild(a);
+  });
+
+  document.getElementById('locationText').textContent = `Based in ${d.location}`;
+
+  // ---------- NAV TOGGLE (mobile) ----------
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // ---------- SCROLL REVEAL ----------
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in-view');
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.section__head, .project-card, .timeline-item').forEach(el => observer.observe(el));
+
+  // ---------- helpers ----------
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+  function escapeAttr(str) { return escapeHtml(str); }
+})();

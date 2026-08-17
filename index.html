@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mahe — Data Engineer Portfolio</title>
+<meta name="description" content="Data engineering portfolio — pipelines, projects, and experience." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="nav">
+  <a href="#top" class="nav__mark">/mahe</a>
+  <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav__links" id="navLinks">
+    <a href="#about">About</a>
+    <a href="#pipeline">Pipeline</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="nav__cta">Get in touch</a>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero__inner">
+      <p class="hero__eyebrow mono">DATA ENGINEERING · BANGLADESH / UAE</p>
+      <h1 class="hero__name" id="heroName">Loading…</h1>
+      <p class="hero__role" id="heroRole"></p>
+      <p class="hero__tagline" id="heroTagline"></p>
+      <div class="hero__actions">
+        <a href="#projects" class="btn btn--primary">See the work</a>
+        <a href="#" id="resumeLink" class="btn btn--ghost">Download CV ↓</a>
+      </div>
+      <div class="hero__stats" id="heroStats"></div>
+    </div>
+
+    <!-- SIGNATURE: pipeline diagram -->
+    <div class="pipeline-sig" id="pipeline" aria-hidden="true">
+      <svg viewBox="0 0 1000 220" preserveAspectRatio="xMidYMid meet" class="pipeline-svg">
+        <defs>
+          <linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#F2B84B"/>
+            <stop offset="100%" stop-color="#3FA796"/>
+          </linearGradient>
+        </defs>
+        <path id="pipePath" d="M40,110 C220,110 220,60 400,60 C580,60 580,160 760,160 C860,160 900,110 960,110"
+              fill="none" stroke="#26303B" stroke-width="2"/>
+        <path d="M40,110 C220,110 220,60 400,60 C580,60 580,160 760,160 C860,160 900,110 960,110"
+              fill="none" stroke="url(#flowGrad)" stroke-width="2" stroke-dasharray="6 10" class="pipeline-flow"/>
+
+        <g class="pipe-node" transform="translate(40,110)">
+          <circle r="26" class="node-circle"/>
+          <text class="node-icon mono" text-anchor="middle" dy="5">01</text>
+          <text class="node-label mono" text-anchor="middle" y="46">INGEST</text>
+        </g>
+        <g class="pipe-node" transform="translate(400,60)">
+          <circle r="26" class="node-circle"/>
+          <text class="node-icon mono" text-anchor="middle" dy="5">02</text>
+          <text class="node-label mono" text-anchor="middle" y="-38">TRANSFORM</text>
+        </g>
+        <g class="pipe-node" transform="translate(760,160)">
+          <circle r="26" class="node-circle"/>
+          <text class="node-icon mono" text-anchor="middle" dy="5">03</text>
+          <text class="node-label mono" text-anchor="middle" y="46">WAREHOUSE</text>
+        </g>
+        <g class="pipe-node" transform="translate(960,110)">
+          <circle r="26" class="node-circle node-circle--accent"/>
+          <text class="node-icon mono" text-anchor="middle" dy="5">04</text>
+          <text class="node-label mono" text-anchor="middle" y="46">INSIGHT</text>
+        </g>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section__head">
+      <p class="section__eyebrow mono">// 01 — About</p>
+      <h2>Who's writing the pipelines</h2>
+    </div>
+    <div class="about__grid">
+      <p class="about__text" id="aboutText"></p>
+      <div class="photo-slot" id="photoSlot"></div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section section--tight" id="skills">
+    <div class="section__head">
+      <p class="section__eyebrow mono">// 02 — Stack</p>
+      <h2>Tools I reach for</h2>
+    </div>
+    <div class="skills__grid" id="skillsGrid"></div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="section__head">
+      <p class="section__eyebrow mono">// 03 — Projects</p>
+      <h2>Built, building, and planned</h2>
+    </div>
+    <div class="projects__grid" id="projectsGrid"></div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section section--tight" id="experience">
+    <div class="section__head">
+      <p class="section__eyebrow mono">// 04 — Experience</p>
+      <h2>Where the work happens</h2>
+    </div>
+    <div class="timeline" id="experienceList"></div>
+
+    <div class="section__head section__head--sub">
+      <p class="section__eyebrow mono">Education</p>
+    </div>
+    <div class="timeline" id="educationList"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <footer class="contact" id="contact">
+    <div class="contact__inner">
+      <p class="section__eyebrow mono">// 05 — Contact</p>
+      <h2>Let's build something that has to actually work.</h2>
+      <div class="contact__row">
+        <a href="#" id="emailLink" class="contact__link"></a>
+        <a href="#" id="phoneLink" class="contact__link"></a>
+      </div>
+      <div class="contact__socials" id="socialLinks"></div>
+      <p class="contact__meta mono" id="locationText"></p>
+    </div>
+  </footer>
+
+</main>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
