@@ -9,14 +9,14 @@
 const PORTFOLIO_DATA = {
 
   // ---------- BASICS ----------
-  name: "Mahe", // EDIT ME: add your full name, e.g. "Mahe Rahman"
+  name: "Mahataz Mahe", // EDIT ME: add your full name, e.g. "Mahe Rahman"
   role: "Data Engineer in training",
   tagline: "I build pipelines that turn raw data into decisions — batch, streaming, and everything that keeps them honest.",
   location: "Chattogram, Bangladesh",
-  email: "your.email@example.com", // EDIT ME
-  phone: "+880 1XXXXXXXXX", // EDIT ME
+  email: "mahe13maha@gmail.com", // EDIT ME
+  phone: "+880 1842662602", // EDIT ME
   resumeUrl: "#", // EDIT ME: link to your CV (PDF)
-  photoUrl: "", // EDIT ME: link to a headshot, or leave blank for initials
+  photoUrl: "dp.png", // EDIT ME: link to a headshot, or leave blank for initials
 
   socials: [
     { label: "GitHub", url: "https://github.com/your-username" }, // EDIT ME
@@ -25,11 +25,8 @@ const PORTFOLIO_DATA = {
 
   // ---------- ABOUT ----------
   about: `Final-year Computer Science & Engineering student at East Delta University,
-  Chittagong, graduating in 2027. Focused on data engineering, with target markets
-  in Bangladesh and the UAE. I like the unglamorous parts of data work — schema
-  design, orchestration, testing pipelines so they fail loudly instead of silently.
-  Outside of coursework, I run a social commerce venture and a B2B sourcing
-  business, so I tend to build things that need to actually work for real users,
+  Chittagong, graduating in 2027. Focused on data engineering. I like the unglamorous parts of data work — schema
+  design, orchestration, testing pipelines so they fail loudly instead of silently. I tend to build things that need to actually work for real users,
   not just pass a demo.`,
 
   stats: [
@@ -101,24 +98,7 @@ const PORTFOLIO_DATA = {
 
   // ---------- EXPERIENCE ----------
   experience: [
-    {
-      role: "Founder — B2B Sourcing & Supplier Outreach",
-      org: "Independent",
-      period: "Ongoing",
-      bullets: [
-        "Run supplier sourcing and outreach for a B2B venture connecting buyers with manufacturers.",
-        "Manage client relationships end-to-end, from first contact through fulfillment.",
-      ],
-    },
-    {
-      role: "Founder — Social Commerce Venture",
-      org: "Independent",
-      period: "Ongoing",
-      bullets: [
-        "Operate a social-commerce storefront across Facebook and Instagram.",
-        "Handle product sourcing, customer communication, and order logistics.",
-      ],
-    },
+   
   ],
 
   // ---------- EDUCATION ----------
