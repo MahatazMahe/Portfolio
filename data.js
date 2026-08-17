@@ -32,7 +32,6 @@ const PORTFOLIO_DATA = {
   stats: [
     { value: "3", label: "Portfolio pipelines" },
     { value: "2027", label: "Graduating" },
-    { value: "BD / UAE", label: "Target markets" },
   ],
 
   // ---------- SKILLS ----------
