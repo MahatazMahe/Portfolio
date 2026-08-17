@@ -10,7 +10,7 @@ const PORTFOLIO_DATA = {
 
   // ---------- BASICS ----------
   name: "Mahataz Mahe", // EDIT ME: add your full name, e.g. "Mahe Rahman"
-  role: "Data Engineer in training",
+  role: "Data Engineer",
   tagline: "I build pipelines that turn raw data into decisions — batch, streaming, and everything that keeps them honest.",
   location: "Chattogram, Bangladesh",
   email: "mahe13maha@gmail.com", // EDIT ME
